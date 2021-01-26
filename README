@@ -1,0 +1,51 @@
+INSTALLATION NOTES
+
+
+//===================================================================================
+AudioKit Installation Notes
+
+As of Xcode 12, use File >> Swift Packages >> Add Package Dependency
+Enter `https://github.com/AudioKit/AudioKit` for the URL.
+Check the use branch option and enter `v5-main`
+//===================================================================================
+
+
+//===================================================================================
+Ableton Link / LinkKit Installation Notes
+
+** the goal is to add the static library libABLLink.a **
+** it also comes with some header files **
+
+1. download the pre-built LinkKit.zip from https://github.com/Ableton/LinkKit/releases
+2. drag the libABLLink.a file into the project navigator, into the Frameworks folder.
+
+this should automatically add the library to
+PROJECT >> TARGET >> General >> Frameworks, Libraries, and Embedded Content
+and
+PROJECT >> TARGET >> Build Phases >> Link Binary With Libraries
+
+3. add a search to Build Settings >> Framework Search Paths and Library Search Paths
+
+$(PROJECT_DIR)/AudioKit+AbletonLink/Frameworks
+
+(this fixes the error: can't find -libABLLink.a)
+
+4. copy the header files into the project:
+ABLLink.h
+ABLLinkUtils.h
+ABLLinkSettingsViewController.h
+
+5. create an ObjCBridgingHeader (if not done already or automatically)
+
+PROJECT >> TARGET >> Build Settings >> Swift Compiler - General >> Objective-C Bridging Header
+
+6. import the headers in the ObjCBridgingHeader
+#import "ABLLink.h"
+#import "ABLLinkUtils.h"
+#import "ABLLinkSettingsViewController.h"
+//===================================================================================
+
+
+
+
+
